@@ -6,23 +6,44 @@ import com.example.merchantoffer.model.OfferType;
 import com.example.merchantoffer.repository.OfferRepository;
 import com.example.merchantoffer.repository.OfferTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
 public class OfferController {
 
+    private static int currentPage = 1;
+    private static int pageSize = 5;
+
     @Autowired
     OfferRepository offerRepository;
 
+//    @GetMapping("/offers")
+//    public List<Offer> getAllOffers() {
+//        return offerRepository.findAll();
+//    }
+
     @GetMapping("/offers")
-    public List<Offer> getAllOffers() {
-        return offerRepository.findAll();
+    public Page<Offer> search(@RequestParam("page") Optional<Integer> page,
+                              @RequestParam("size") Optional<Integer> size) {
+        page.ifPresent(p -> currentPage = p);
+        size.ifPresent(s -> pageSize = s);
+        Sort sort = Sort.by(new Order(Sort.Direction.DESC, "id"));
+
+        Pageable pageable = PageRequest.of(currentPage - 1, pageSize, sort);
+
+        return offerRepository.findAll(pageable);
     }
 
     @PostMapping("/offers")
