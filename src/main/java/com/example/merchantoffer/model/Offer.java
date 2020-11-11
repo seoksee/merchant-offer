@@ -24,8 +24,9 @@ public class Offer {
     @NotBlank
     private String description;
 
-    @NotBlank
-    private String offerType;
+    @ManyToOne
+    @JoinColumn(name="offer_types_id")
+    private OfferType offerType;
 
     private Long points;
 
@@ -73,11 +74,11 @@ public class Offer {
         this.description = description;
     }
 
-    public String getOfferType() {
+    public OfferType getOfferType() {
         return offerType;
     }
 
-    public void setOfferType(String offerType) {
+    public void setOfferType(OfferType offerType) {
         this.offerType = offerType;
     }
 
