@@ -26,12 +26,12 @@ public class Offer {
     @NotBlank
     private String description;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name="offer_types_id")
-//    private OfferType offerType;
+    @ManyToOne
+    @JoinColumn(name="offer_types_id", nullable = false)
+    private OfferType offerType;
 
-    @Column(name="offer_types_id")
-    private Long offerTypeId;
+//    @Column(name="offer_types_id")
+//    private Long offerTypeId;
 
     private Long points;
 
@@ -79,22 +79,22 @@ public class Offer {
         this.description = description;
     }
 
-//    public OfferType getOfferType() {
-//        return offerType;
+    public OfferType getOfferType() {
+        return offerType;
+    }
+
+    public void setOfferType(OfferType offerType) {
+        this.offerType = offerType;
+    }
+
+
+//    public Long getOfferTypeId() {
+//        return offerTypeId;
 //    }
 //
-//    public void setOfferType(OfferType offerType) {
-//        this.offerType = offerType;
+//    public void setOfferTypeId(Long offerTypeId) {
+//        this.offerTypeId = offerTypeId;
 //    }
-
-
-    public Long getOfferTypeId() {
-        return offerTypeId;
-    }
-
-    public void setOfferTypeId(Long offerTypeId) {
-        this.offerTypeId = offerTypeId;
-    }
 
     public Long getPoints() {
         return points;

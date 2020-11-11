@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "offer_types")
@@ -24,8 +25,9 @@ public class OfferType {
     @NotBlank
     private String name;
 
-    @OneToMany(targetEntity = Offer.class, cascade = CascadeType.ALL)
-    private List<Offer> offers;
+    @Column(nullable = false)
+    @OneToMany(mappedBy = "offerType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Offer> offerSet;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)

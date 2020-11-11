@@ -43,8 +43,8 @@ public class OfferController {
 
         offer.setName(offerDetails.getName());
         offer.setDescription(offerDetails.getDescription());
-//        offer.setOfferType(offerDetails.getOfferType());
-        offer.setOfferTypeId(offerDetails.getOfferTypeId());
+        offer.setOfferType(offerDetails.getOfferType());
+//        offer.setOfferTypeId(offerDetails.getOfferTypeId());
         offer.setPoints(offerDetails.getPoints());
         offer.setCashRebate(offerDetails.getCashRebate());
         offer.setStartDate(offerDetails.getStartDate());
