@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface OfferTypeRepository extends JpaRepository<OfferType, Long> {
 
-    @Query("select name from offer_types")
+    @Query(value = "select t.name from offer_types t",
+    nativeQuery = true)
     List<String> findName();
 }
