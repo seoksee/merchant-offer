@@ -36,14 +36,18 @@ public class OfferController {
 
     @GetMapping("/offers")
     public Page<Offer> search(@RequestParam("page") Optional<Integer> page,
-                              @RequestParam("size") Optional<Integer> size) {
+                              @RequestParam("size") Optional<Integer> size,
+                              @RequestParam("offerType") Optional<OfferType>  offerType) {
         page.ifPresent(p -> currentPage = p);
         size.ifPresent(s -> pageSize = s);
         Sort sort = Sort.by(new Order(Sort.Direction.DESC, "id"));
 
         Pageable pageable = PageRequest.of(currentPage - 1, pageSize, sort);
 
-        return offerRepository.findAll(pageable);
+        if(offerType == null)
+            return offerRepository.findAll(pageable);
+        else
+            return offerRepository.findByOfferType(offerType, pageable);
     }
 
     @PostMapping("/offers")
