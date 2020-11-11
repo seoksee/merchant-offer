@@ -1,5 +1,7 @@
 package com.example.merchantoffer.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -24,9 +26,12 @@ public class Offer {
     @NotBlank
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name="offer_types_id")
-    private OfferType offerType;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name="offer_types_id")
+//    private OfferType offerType;
+
+    @Column(name="offer_types_id")
+    private Long offerTypeId;
 
     private Long points;
 
@@ -74,12 +79,21 @@ public class Offer {
         this.description = description;
     }
 
-    public OfferType getOfferType() {
-        return offerType;
+//    public OfferType getOfferType() {
+//        return offerType;
+//    }
+//
+//    public void setOfferType(OfferType offerType) {
+//        this.offerType = offerType;
+//    }
+
+
+    public Long getOfferTypeId() {
+        return offerTypeId;
     }
 
-    public void setOfferType(OfferType offerType) {
-        this.offerType = offerType;
+    public void setOfferTypeId(Long offerTypeId) {
+        this.offerTypeId = offerTypeId;
     }
 
     public Long getPoints() {

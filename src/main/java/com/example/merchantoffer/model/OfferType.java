@@ -1,6 +1,8 @@
 package com.example.merchantoffer.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -22,7 +24,7 @@ public class OfferType {
     @NotBlank
     private String name;
 
-    @OneToMany(mappedBy = "offerType")
+    @OneToMany(targetEntity = Offer.class, cascade = CascadeType.ALL)
     private List<Offer> offers;
 
     @Column(nullable = false, updatable = false)
