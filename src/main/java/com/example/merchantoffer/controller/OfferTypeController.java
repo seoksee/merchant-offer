@@ -22,6 +22,11 @@ public class OfferTypeController {
         return offerTypeRepository.findAll();
     }
 
+    @GetMapping("/offerTypeNames")
+    public List<String> getAllOfferTypeNames() {
+        return offerTypeRepository.findName();
+    }
+
     @PostMapping("/offerTypes")
     public OfferType createOfferType(@Valid @RequestBody OfferType offerType) {
         return offerTypeRepository.save(offerType);

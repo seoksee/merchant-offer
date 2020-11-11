@@ -2,9 +2,12 @@ package com.example.merchantoffer.controller;
 
 import com.example.merchantoffer.exception.ResourceNotFoundException;
 import com.example.merchantoffer.model.Offer;
+import com.example.merchantoffer.model.OfferType;
 import com.example.merchantoffer.repository.OfferRepository;
+import com.example.merchantoffer.repository.OfferTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
