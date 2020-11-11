@@ -50,7 +50,7 @@ public class OfferController {
         return updatedOffer;
     }
 
-    @DeleteMapping("/notes/{id}")
+    @DeleteMapping("/offers/{id}")
     public ResponseEntity<?> deleteOffer(@PathVariable(value = "id") Long offerId) {
         Offer offer = offerRepository.findById(offerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Offer", "id", offerId));
