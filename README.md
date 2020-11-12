@@ -31,5 +31,5 @@ MySQL - 5.0.0 or later <br>
 </ol>
 
 ## Exploring RESTful APIs
-1. Import the `Merchant Offer.postman_environment` attached in the email.
-2. Try exploring the CRUD APIs with the attached `merchant-offer.postman_collection`.
+1. Import and use the `Merchant Offer.postman_environment` attached in the email.
+2. Explore the CRUD APIs with the attached `merchant-offer.postman_collection`.
