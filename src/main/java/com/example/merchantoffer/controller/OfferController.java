@@ -44,7 +44,7 @@ public class OfferController {
 
         Pageable pageable = PageRequest.of(currentPage - 1, pageSize, sort);
 
-        if(offerType == null)
+        if(!offerType.isPresent())
             return offerRepository.findAll(pageable);
         else
             return offerRepository.findByOfferType(offerType, pageable);
