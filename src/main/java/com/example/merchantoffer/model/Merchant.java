@@ -34,7 +34,7 @@ public class Merchant {
     @NotBlank
     private String address;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.REFRESH })
     @JoinTable(name = "merchants_offers",
         joinColumns = { @JoinColumn(name = "merchant_id", referencedColumnName = "id") },
         inverseJoinColumns = { @JoinColumn(name = "offer_id", referencedColumnName = "id") })

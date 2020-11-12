@@ -42,7 +42,7 @@ public class MerchantController {
         merchant.setName(merchantDetails.getName());
         merchant.setPhone(merchantDetails.getPhone());
         merchant.setAddress(merchantDetails.getAddress());
-
+        //when updating merchant, users are not allowed to change the offers.
         Merchant updatedMerchant = merchantRepository.save(merchant);
         return updatedMerchant;
     }

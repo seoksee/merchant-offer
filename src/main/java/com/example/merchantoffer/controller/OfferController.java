@@ -69,7 +69,7 @@ public class OfferController {
         offer.setName(offerDetails.getName());
         offer.setDescription(offerDetails.getDescription());
         offer.setOfferType(offerDetails.getOfferType());
-//        offer.setOfferTypeId(offerDetails.getOfferTypeId());
+        //when updating offer, users are not allowed to change the merchants.
         offer.setPoints(offerDetails.getPoints());
         offer.setCashRebate(offerDetails.getCashRebate());
         offer.setStartDate(offerDetails.getStartDate());

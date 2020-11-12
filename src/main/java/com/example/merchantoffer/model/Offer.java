@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -33,7 +34,7 @@ public class Offer {
     @JoinColumn(name="offer_types_id", nullable = false)
     private OfferType offerType;
 
-    @ManyToMany(cascade = { CascadeType.MERGE })
+    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.REFRESH })
     @JoinTable(name="merchants_offers",
         joinColumns = @JoinColumn(name="offer_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "merchant_id", referencedColumnName = "id"),
