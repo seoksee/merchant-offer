@@ -10,6 +10,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "offers")
@@ -30,8 +33,17 @@ public class Offer {
     @JoinColumn(name="offer_types_id", nullable = false)
     private OfferType offerType;
 
-//    @Column(name="offer_types_id")
-//    private Long offerTypeId;
+    @ManyToMany(cascade = { CascadeType.MERGE })
+    @JoinTable(name="merchants_offers",
+        joinColumns = @JoinColumn(name="offer_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "merchant_id", referencedColumnName = "id"),
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"offer_id", "merchant_id"})})
+    @JsonIgnoreProperties("offers")
+    private List<Merchant> merchants;
+
+//    @Column(nullable = false)
+//    @OneToMany(mappedBy = "Offer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private Set<MerchantOffer> merchantOfferSet;
 
     private Long points;
 
@@ -54,6 +66,19 @@ public class Offer {
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date updatedAt;
+
+    public Offer(){
+        super();
+    }
+
+    public Offer(String name, String description, Long points, float cashRebate, Date startDate, Date endDate) {
+        this.name = name;
+        this.description = description;
+        this.points = points;
+        this.cashRebate = cashRebate;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
 
     public Long getId() {
         return id;
@@ -87,6 +112,13 @@ public class Offer {
         this.offerType = offerType;
     }
 
+    public List<Merchant> getMerchants() {
+        return merchants;
+    }
+
+    public void setMerchants(List<Merchant> merchants) {
+        this.merchants = merchants;
+    }
 
 //    public Long getOfferTypeId() {
 //        return offerTypeId;
