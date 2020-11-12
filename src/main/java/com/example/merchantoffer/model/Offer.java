@@ -1,19 +1,14 @@
 package com.example.merchantoffer.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "offers")
@@ -41,10 +36,6 @@ public class Offer {
         uniqueConstraints = {@UniqueConstraint(columnNames = {"offer_id", "merchant_id"})})
     @JsonIgnoreProperties("offers")
     private List<Merchant> merchants;
-
-//    @Column(nullable = false)
-//    @OneToMany(mappedBy = "Offer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private Set<MerchantOffer> merchantOfferSet;
 
     private Long points;
 
@@ -120,14 +111,6 @@ public class Offer {
     public void setMerchants(List<Merchant> merchants) {
         this.merchants = merchants;
     }
-
-//    public Long getOfferTypeId() {
-//        return offerTypeId;
-//    }
-//
-//    public void setOfferTypeId(Long offerTypeId) {
-//        this.offerTypeId = offerTypeId;
-//    }
 
     public Long getPoints() {
         return points;

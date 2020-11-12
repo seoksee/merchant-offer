@@ -9,11 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Entity
 @Table(name = "merchants")
@@ -40,10 +36,6 @@ public class Merchant {
         inverseJoinColumns = { @JoinColumn(name = "offer_id", referencedColumnName = "id") })
     private List<Offer> offers;
 
-//    @Column(nullable = false)
-//    @OneToMany(mappedBy = "Merchant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private Set<MerchantOffer> merchantOfferSet;
-
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
@@ -63,12 +55,6 @@ public class Merchant {
         this.phone = phone;
         this.address = address;
     }
-
-//    public Merchant(String name, Long phone, String address, Set<Offer> offers){
-//        this.name = name;
-//        this.phone = phone;
-//        this.offers = offers;
-//    }
 
     public Long getId() {
         return id;
